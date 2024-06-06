@@ -1,0 +1,47 @@
+class SimpleChatbot:
+    def __init__(self):
+        self.greetings = ["hello", "hi", "hey"]
+        self.order_status_keywords = ["order status", "order", "status"]
+        self.product_availability_keywords = ["product availability", "product", "availability"]
+        self.store_hours_keywords = ["store hours", "hours"]
+    
+    def greet(self):
+        return "Hello! How can I help you today?"
+    
+    def check_order_status(self):
+        return "Please provide your order ID to check the status."
+    
+    def check_product_availability(self):
+        return "Please provide the product name or ID to check its availability."
+    
+    def provide_store_hours(self):
+        return "Our store hours are from 9 AM to 9 PM, Monday to Saturday."
+    
+    def fallback(self):
+        return "I'm sorry, I didn't understand that. Can you please rephrase?"
+    
+    def handle_input(self, user_input):
+        user_input = user_input.lower()
+        
+        if any(greet in user_input for greet in self.greetings):
+            return self.greet()
+        elif any(keyword in user_input for keyword in self.order_status_keywords):
+            return self.check_order_status()
+        elif any(keyword in user_input for keyword in self.product_availability_keywords):
+            return self.check_product_availability()
+        elif any(keyword in user_input for keyword in self.store_hours_keywords):
+            return self.provide_store_hours()
+        else:
+            return self.fallback()
+
+# Example of using the chatbot
+if __name__ == "__main__":
+    bot = SimpleChatbot()
+    
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() in ["exit", "quit"]:
+            print("Chatbot: Goodbye!")
+            break
+        response = bot.handle_input(user_input)
+        print(f"Chatbot: {response}")
